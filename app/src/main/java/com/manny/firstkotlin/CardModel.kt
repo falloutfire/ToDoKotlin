@@ -31,13 +31,16 @@ class CardModel : CardModelInterface {
             }
             content.put("COMPLETE", a.toString())
             content.put("CARDID", id)
-            db!!.insert("TODO", null, content)
+            db.insert("TODO", null, content)
         }
         db.close()
     }
 
-    override fun delete(context: Context, card: Card) {
-        //cards.remove(card)
+    override fun delete(context: Context, id: Long) {
+        val db = CardSQLIteHelper(context).writableDatabase
+        db.delete("CARDS", "_id = $id", null)
+        db.delete("TODO", "CARDID = $id", null)
+        db.close()
     }
 
     @SuppressLint("Recycle")

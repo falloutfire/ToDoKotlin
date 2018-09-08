@@ -16,8 +16,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailCardActivity" />
-        <activity android:name=".AddCardActivity"></activity>
+        <activity
+            android:name=".DetailCardActivity"
+            android:parentActivityName=".CardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CardActivity" />
+        </activity>
+        <activity
+            android:name=".AddCardActivity"
+            android:parentActivityName=".CardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CardActivity" />
+        </activity>
     </application>
 
 </manifest>
