@@ -1,10 +1,11 @@
 package com.manny.firstkotlin
 
+import android.annotation.SuppressLint
 import android.database.Cursor
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.LoaderManager
 import android.support.v4.content.Loader
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
@@ -25,6 +26,9 @@ class DetailCardActivity : AppCompatActivity(), ToDoViewInterface, LoaderManager
         presenter.getToDoCursor(this@DetailCardActivity, idCard)
         setSupportActionBar(toolbarTodo)
 
+        val actionBar = supportActionBar
+        actionBar!!.setDisplayHomeAsUpEnabled(true)
+
         cursorAdapter = CustomAdapter(this, R.layout.item_todos, null, arrayOf("NAMEWORK", "COMPLETE"), intArrayOf(R.id.textNamework, R.id.checkboxTodo), 0, idCard)
         list_todos.adapter = cursorAdapter
         supportLoaderManager.initLoader(0, null, this)
@@ -35,10 +39,10 @@ class DetailCardActivity : AppCompatActivity(), ToDoViewInterface, LoaderManager
         return super.onCreateOptionsMenu(menu)
     }
 
+    @SuppressLint("InflateParams")
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when(item!!.itemId) {
-            R.id.action_create ->
-            {
+            R.id.action_create -> {
                 if(list_layout_todo.childCount < 3){
                     val child = layoutInflater.inflate(R.layout.item_adding_todo, null)
                     list_layout_todo.addView(child)
@@ -78,6 +82,4 @@ class DetailCardActivity : AppCompatActivity(), ToDoViewInterface, LoaderManager
     override fun onLoaderReset(loader: Loader<Cursor>) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
-    
 }

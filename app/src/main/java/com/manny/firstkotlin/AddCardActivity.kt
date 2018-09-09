@@ -3,6 +3,7 @@ package com.manny.firstkotlin
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_add_card.*
 
@@ -13,7 +14,12 @@ class AddCardActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        title = "Adding Card"
         setContentView(R.layout.activity_add_card)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar!!.setDisplayHomeAsUpEnabled(true)
         btnAddCard.setOnClickListener {
             createCard()
         }
