@@ -9,13 +9,7 @@ class CardCursorLoader(context: Context) : CursorLoader(context) {
     var cardPresenter: CardPresenter = CardPresenter()
 
     override fun loadInBackground(): Cursor? {
-        val cursor = cardPresenter.getCardsCursor(context)
-        /*try {
-            TimeUnit.SECONDS.sleep(3)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }*/
-        return cursor
+        return cardPresenter.getCardsCursor(context)
     }
 }
 
@@ -24,12 +18,6 @@ class ToDoCursorLoader(context: Context, id: Long) : CursorLoader(context) {
     var idCard = id
 
     override fun loadInBackground(): Cursor? {
-        val cursor = cardPresenter.getToDoCursor(context, idCard)
-        /*try {
-            TimeUnit.SECONDS.sleep(3)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }*/
-        return cursor
+        return cardPresenter.getToDoCursor(context, idCard)
     }
 }

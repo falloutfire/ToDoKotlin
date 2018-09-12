@@ -59,10 +59,6 @@ class CardActivity : AppCompatActivity(), CardViewInterface, LoaderCallbacks<Cur
         }
     }
 
-    override fun addCard() {
-        supportLoaderManager.getLoader<Any>(0)!!.forceLoad()
-    }
-
     override fun updateCards() {
         supportLoaderManager.getLoader<Any>(0)!!.forceLoad()
         setListItemListener()

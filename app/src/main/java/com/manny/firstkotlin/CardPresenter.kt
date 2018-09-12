@@ -2,6 +2,10 @@ package com.manny.firstkotlin
 
 import android.content.Context
 import android.database.Cursor
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.withContext
 
 class CardPresenter() : CardPresenterInterface {
 
@@ -18,20 +22,24 @@ class CardPresenter() : CardPresenterInterface {
     }
 
     override fun addCard(context: Context, card: Card) {
-        cardModelInterface.add(context, card)
+        launch(UI) {
+            withContext(CommonPool) { cardModelInterface.add(context, card) }
+        }
     }
 
     override fun addToDo(context: Context, id: Long, toDo: ToDo) {
-        cardModelInterface.addToDo(context, id, toDo)
+        launch(UI) {
+            withContext(CommonPool) { cardModelInterface.addToDo(context, id, toDo) }
+        }
         toDoViewInterface.setUpToDos()
     }
 
-    override fun save(context: Context, id: Long, card: Card) {
-        cardModelInterface.save(context, id, card)
-    }
-
     override fun delete(context: Context, id: Long) {
-        cardModelInterface.delete(context, id)
+        launch(UI) {
+            withContext(CommonPool) {
+                cardModelInterface.delete(context, id)
+            }
+        }
         cardViewInterface.updateCards()
     }
 
@@ -47,8 +55,12 @@ class CardPresenter() : CardPresenterInterface {
         return cardModelInterface.getToDo(context, id)
     }
 
-    fun setToDoCursor(context: Context, idCard: Long, idTodo: Int, complete: Int){
-        cardModelInterface.setToDo(context, idCard, idTodo, complete)
+    fun setToDoCursor(context: Context, idCard: Long, idTodo: Int, complete: Int) {
+        launch(UI) {
+            withContext(CommonPool) {
+                cardModelInterface.setToDo(context, idCard, idTodo, complete)
+            }
+        }
         getToDoCursor(context, idCard)
     }
 }

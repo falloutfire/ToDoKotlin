@@ -13,10 +13,6 @@ data class ToDo(var id: Int, var nameWork: String, var complete: Boolean)
 
 class CardModel : CardModelInterface {
 
-    override fun save(context: Context, id: Long, card: Card) {
-        val db = CardSQLIteHelper(context).writableDatabase
-    }
-
     override fun add(context: Context, card: Card) {
         val db = CardSQLIteHelper(context).writableDatabase
         val content = ContentValues()
@@ -46,9 +42,9 @@ class CardModel : CardModelInterface {
     @SuppressLint("Recycle")
     override fun getAll(context: Context): Cursor {
         val cardSQLIteHelper = CardSQLIteHelper(context)
+        val db = cardSQLIteHelper.readableDatabase
         var cursor: Cursor? = null
         return try {
-            val db = cardSQLIteHelper.readableDatabase
             cursor = db.query("CARDS", arrayOf("_id", "TITLE"), null, null, null, null, null)
             cursor
         } catch (e: SQLiteException) {
@@ -56,11 +52,12 @@ class CardModel : CardModelInterface {
         }
     }
 
+    @SuppressLint("Recycle")
     override fun getToDo(context: Context, id: Long): Cursor {
         val cardSQLIteHelper = CardSQLIteHelper(context)
+        val db = cardSQLIteHelper.readableDatabase
         var cursor: Cursor? = null
         return try {
-            val db = cardSQLIteHelper.readableDatabase
             cursor = db.query("TODO", arrayOf("_id", "NAMEWORK", "COMPLETE", "CARDID"), "CARDID = $id", null, null, null, null)
             cursor
         } catch (e: SQLiteException) {
