@@ -63,4 +63,8 @@ class CardPresenter() : CardPresenterInterface {
         }
         getToDoCursor(context, idCard)
     }
+
+    fun deleteToDo(context: Context, idTodo: Long, idCard: Long) {
+        cardModelInterface.deleteToDo(context, idTodo, idCard)
+    }
 }

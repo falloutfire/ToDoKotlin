@@ -9,13 +9,13 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/checkboxTodo"
-        android:layout_margin="10dp" />
+        android:layout_margin="10dp"
+        android:focusable="false" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/textNamework"
-        android:text="TEST"
         android:gravity="center_vertical"
         android:textSize="15sp" />
 

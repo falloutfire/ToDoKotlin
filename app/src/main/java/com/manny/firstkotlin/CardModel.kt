@@ -89,6 +89,12 @@ class CardModel : CardModelInterface {
         closeConnection(cardSQLIteHelper, db)
     }
 
+    override fun deleteToDo(context: Context, idTodo: Long, idCard: Long) {
+        val db = CardSQLIteHelper(context).writableDatabase
+        db.delete("TODO", "CARDID = $idCard and _id = $idTodo", null)
+        db.close()
+    }
+
     override fun closeConnection(sqlIteHelper: CardSQLIteHelper, db: SQLiteDatabase) {
         db.close()
         sqlIteHelper.close()

@@ -1,11 +1,7 @@
 <resources>
-    <string name="app_name">FirstKotlin</string>
-    <string name="add_card">Add card</string>
+    <string name="app_name">Заметки</string>
+    <string name="add_card">Добавить заметку</string>
     <string name="todo">ToDo</string>
     <string name="enter_todo">Enter ToDo</string>
     <string name="enter_card">Enter title</string>
-    <string-array name="beer_color">
-        <item>light</item>
-        <item>brown</item>
-    </string-array>
 </resources>

@@ -75,11 +75,11 @@ class CardActivity : AppCompatActivity(), CardViewInterface, LoaderCallbacks<Cur
 
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
-        menu!!.add(0, 1, 0, "Delete")
+        menuInflater.inflate(R.menu.context, menu)
     }
 
     override fun onContextItemSelected(item: MenuItem?): Boolean {
-        if (item!!.itemId == 1) {
+        if (item!!.itemId == R.id.delete) {
             val acmi = item.menuInfo as AdapterView.AdapterContextMenuInfo
             cardPresenter.delete(this@CardActivity, acmi.id)
             updateCards()
