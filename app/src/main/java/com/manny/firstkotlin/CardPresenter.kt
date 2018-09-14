@@ -34,6 +34,12 @@ class CardPresenter() : CardPresenterInterface {
         toDoViewInterface.setUpToDos()
     }
 
+    fun saveToDo(context: Context, toDo: ToDo) {
+        launch(UI) {
+            withContext(CommonPool) { cardModelInterface.saveToDo(context, toDo) }
+        }
+    }
+
     override fun delete(context: Context, id: Long) {
         launch(UI) {
             withContext(CommonPool) {

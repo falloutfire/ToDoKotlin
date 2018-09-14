@@ -13,6 +13,19 @@ data class ToDo(var id: Int, var nameWork: String, var complete: Boolean)
 
 class CardModel : CardModelInterface {
 
+    override fun saveToDo(context: Context, toDo: ToDo) {
+        val db = CardSQLIteHelper(context).writableDatabase
+        val content = ContentValues()
+        content.put("NAMEWORK", toDo.nameWork)
+        content.put("COMPLETE", when (toDo.complete) {
+            true -> 1
+            false -> 0
+        })
+        //content.put("CARDID", id)
+        db.update("TODO", content, "_id = ${toDo.id}", null)
+        db.close()
+    }
+
     override fun add(context: Context, card: Card) {
         val db = CardSQLIteHelper(context).writableDatabase
         val content = ContentValues()

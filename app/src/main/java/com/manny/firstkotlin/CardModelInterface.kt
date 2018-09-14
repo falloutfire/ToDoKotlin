@@ -13,4 +13,5 @@ interface CardModelInterface {
     fun setToDo(context: Context, idCard: Long, idTodo: Int, complete: Int)
     fun closeConnection(sqlIteHelper: CardSQLIteHelper, db: SQLiteDatabase)
     fun deleteToDo(context: Context, idTodo: Long, idCard: Long)
+    fun saveToDo(context: Context, toDo: ToDo)
 }

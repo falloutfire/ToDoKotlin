@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_detail_card.*
 
+
 class DetailCardActivity : AppCompatActivity(), ToDoViewInterface, LoaderManager.LoaderCallbacks<Cursor> {
 
     var EXTRA_ID_CARD: String = "cardId"
