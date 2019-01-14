@@ -33,7 +33,7 @@ class CustomAdapter(mContext: Context, layout: Int, c: Cursor?, from: Array<Stri
     override fun newView(context: Context?, cursor: Cursor?, parent: ViewGroup?): View {
         val view = mLayoutInflater.inflate(R.layout.item_todos, null)
         val id = cursor!!.getString(cursor.getColumnIndex("_id"))
-        val checkBox = view.findViewById<CheckBox>(R.id.checkboxTodo)
+        val checkBox = view.findViewById(R.id.checkboxTodo) as CheckBox
         checkBox.tag = id
         checkBox.isChecked = when (cursor.getInt(cursor.getColumnIndex("COMPLETE"))) {
             1 -> true
@@ -53,19 +53,22 @@ class CustomAdapter(mContext: Context, layout: Int, c: Cursor?, from: Array<Stri
 
             override fun onTextChanged(s: CharSequence, start: Int,
                                        before: Int, count: Int) {
-                val toDo = ToDo(id.toInt(), s.toString(), when (cursor.getInt(cursor.getColumnIndex("COMPLETE"))) {
-                    1 -> true
-                    else -> false
-                })
+                if (!cursor.isClosed) {
+                    val toDo = ToDo(id.toInt(), s.toString(), when (cursor.getInt(cursor.getColumnIndex("COMPLETE"))) {
+                        1 -> true
+                        else -> false
+                    })
 
-                cardPresenter.saveToDo(mContext, toDo)
+
+                    cardPresenter.saveToDo(mContext, toDo)
+                }
             }
         })
         return view
     }
 
     override fun bindView(view: View?, context: Context?, cursor: Cursor?) {
-        val checkBox = view!!.findViewById<CheckBox>(R.id.checkboxTodo)
+        val checkBox = view!!.findViewById(R.id.checkboxTodo) as CheckBox
         val id = cursor!!.getString(cursor.getColumnIndex("_id"))
         checkBox.tag = id
         checkBox.isChecked = when (cursor.getInt(cursor.getColumnIndex("COMPLETE"))) {
@@ -73,7 +76,9 @@ class CustomAdapter(mContext: Context, layout: Int, c: Cursor?, from: Array<Stri
             else -> false
         }
 
-        view.textNamework.setText(cursor.getString(cursor.getColumnIndex("NAMEWORK")))
+        if (!cursor.isClosed) {
+            view.textNamework.setText(cursor.getString(cursor.getColumnIndex("NAMEWORK")))
+        }
 
     }
 

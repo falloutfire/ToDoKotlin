@@ -12,17 +12,17 @@ class CardSQLIteHelper(var context: Context?,
 
     override fun onCreate(db: SQLiteDatabase?) {
         db!!.execSQL("CREATE TABLE CARDS (_id INTEGER PRIMARY KEY AUTOINCREMENT, TITLE TEXT)")
-        db!!.execSQL("CREATE TABLE TODO (_id INTEGER PRIMARY KEY AUTOINCREMENT, NAMEWORK TEXT, COMPLETE INTEGER, CARDID INTEGER)")
+        db.execSQL("CREATE TABLE TODO (_id INTEGER PRIMARY KEY AUTOINCREMENT, NAMEWORK TEXT, COMPLETE INTEGER, CARDID INTEGER)")
         insertCard(db, "work test", arrayListOf(ToDo(1, "clear table", false)))
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        when(oldVersion){
+        when (oldVersion) {
             1 -> {
                 db!!.execSQL("DROP TABLE CARDS")
-                db!!.execSQL("DROP TABLE TODO")
-                db!!.execSQL("CREATE TABLE CARDS (_id INTEGER PRIMARY KEY AUTOINCREMENT, TITLE TEXT)")
-                db!!.execSQL("CREATE TABLE TODO (_id INTEGER PRIMARY KEY AUTOINCREMENT, NAMEWORK TEXT, COMPLETE INTEGER, CARDID INTEGER)")
+                db.execSQL("DROP TABLE TODO")
+                db.execSQL("CREATE TABLE CARDS (_id INTEGER PRIMARY KEY AUTOINCREMENT, TITLE TEXT)")
+                db.execSQL("CREATE TABLE TODO (_id INTEGER PRIMARY KEY AUTOINCREMENT, NAMEWORK TEXT, COMPLETE INTEGER, CARDID INTEGER)")
                 insertCard(db, "work test", arrayListOf(ToDo(1, "clear table", false)))
             }
         }
@@ -41,7 +41,7 @@ class CardSQLIteHelper(var context: Context?,
             }
             content.put("COMPLETE", a.toString())
             content.put("CARDID", id)
-            db!!.insert("TODO", null, content)
+            db.insert("TODO", null, content)
         }
 
     }

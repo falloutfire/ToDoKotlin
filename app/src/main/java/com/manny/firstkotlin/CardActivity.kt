@@ -25,7 +25,7 @@ class CardActivity : AppCompatActivity(), CardViewInterface, LoaderCallbacks<Cur
         setContentView(R.layout.activity_todo)
         setSupportActionBar(toolbar)
 
-        cursorAdapter = SimpleCursorAdapter(this, R.layout.item_card, null, arrayOf("TITLE"), intArrayOf(R.id.card_name), 0)
+        cursorAdapter = SimpleCursorAdapter(this, R.layout.item_card/*R.layout.card_view*/, null, arrayOf("TITLE"), intArrayOf(R.id.card_name)/*intArrayOf(R.id.titleToDoCard)*/, 0)
         list_cards.adapter = cursorAdapter
         supportLoaderManager.initLoader(0, null, this)
 
@@ -65,7 +65,7 @@ class CardActivity : AppCompatActivity(), CardViewInterface, LoaderCallbacks<Cur
     }
 
     private fun setListItemListener() {
-        val listCard = findViewById<ListView>(R.id.list_cards)
+        val listCard = findViewById(R.id.list_cards) as ListView
         listCard.setOnItemClickListener { parent, view, position, id ->
             val intent = Intent(this@CardActivity, DetailCardActivity::class.java)
             intent.putExtra(DetailCardActivity().EXTRA_ID_CARD, id)
@@ -97,7 +97,8 @@ class CardActivity : AppCompatActivity(), CardViewInterface, LoaderCallbacks<Cur
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //cursorAdapter.swapCursor(null)
+
     }
 
     override fun getToDoOfCard(card: Card) {

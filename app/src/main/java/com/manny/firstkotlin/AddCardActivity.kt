@@ -16,7 +16,7 @@ class AddCardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         title = "Adding Card"
         setContentView(R.layout.activity_add_card)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
         val actionBar = supportActionBar
         actionBar!!.setDisplayHomeAsUpEnabled(true)

@@ -25,6 +25,7 @@ class DetailCardActivity : AppCompatActivity(), ToDoViewInterface, LoaderManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        title = "Детали"
         setContentView(R.layout.activity_detail_card)
         idCard = intent.extras.getLong(EXTRA_ID_CARD)
         cardPresenter.getToDoCursor(this@DetailCardActivity, idCard)
@@ -49,19 +50,19 @@ class DetailCardActivity : AppCompatActivity(), ToDoViewInterface, LoaderManager
         return when (item!!.itemId) {
             R.id.action_create -> {
                 //if (list_layout_todo.childCount < 3) {
-                    val child = layoutInflater.inflate(R.layout.item_adding_todo, null)
-                    list_layout_todo.addView(child)
-                    val btnAdd = child.findViewById<Button>(R.id.close_editText)
-                    btnAdd.setOnClickListener {
-                        val editNamework = child.findViewById<EditText>(R.id.editTextNamework)
-                        val todo = ToDo(0, editNamework.text.toString(), false)
-                        cardPresenter.addToDo(this@DetailCardActivity, idCard, todo)
-                        if (editNamework.isFocusable) {
-                            editNamework.isFocusable = false
-                        }
-                        supportLoaderManager.getLoader<Any>(0)!!.forceLoad()
-                        list_layout_todo.removeView(child)
-                        //}
+                val child = layoutInflater.inflate(R.layout.item_adding_todo, null)
+                list_layout_todo.addView(child)
+                val btnAdd = child.findViewById(R.id.close_editText) as Button
+                btnAdd.setOnClickListener {
+                    val editNamework = child.findViewById(R.id.editTextNamework) as EditText
+                    val todo = ToDo(0, editNamework.text.toString(), false)
+                    cardPresenter.addToDo(this@DetailCardActivity, idCard, todo)
+                    if (editNamework.isFocusable) {
+                        editNamework.isFocusable = false
+                    }
+                    supportLoaderManager.getLoader<Any>(0)!!.forceLoad()
+                    list_layout_todo.removeView(child)
+                    //}
                 }
                 return true
             }
@@ -99,6 +100,6 @@ class DetailCardActivity : AppCompatActivity(), ToDoViewInterface, LoaderManager
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 }

@@ -1,7 +1,14 @@
 <resources>
-    <string name="app_name">Заметки</string>
-    <string name="add_card">Добавить заметку</string>
-    <string name="todo">ToDo</string>
-    <string name="enter_todo">Enter ToDo</string>
-    <string name="enter_card">Enter title</string>
+    <string name="app_name">SecureKeep</string>
+    <string name="enteringText">Используйте пароль или отпечаток пальца для входа</string>
+    <string name="startText">Придумайте пароль для входа в систему</string>
+    <string name="login">Войти</string>
+    <string name="startUse">Начать!</string>
+    <string name="is_accessed">false</string>
+    <string name="password"></string>
+    <string name="pin" />
+    <string name="add_card">Добавить карту</string>
+    <string name="enter_card">Название карточки</string>
+    <string name="todo_settings">Редактирование</string>
+    <string name="enter_todo">Название задания</string>
 </resources>
